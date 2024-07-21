@@ -22,6 +22,9 @@ module.exports = {
                 "panda-nose": "50px 20px/30px 15px",
                 "panda-body": "100px 100px 100px 100px/126px 126px 96px 96px",
                 "panda-foot": "40px 40px 39px 40px/26px 26px 63px 63px"
+            },
+            screens: {
+                "480": { "max": "480px" }
             }
         },
     },
