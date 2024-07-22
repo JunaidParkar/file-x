@@ -1,208 +1,97 @@
 "use client"
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 const Home = () => {
+
+  const [activeTab, setActiveTab] = useState("google_drive")
+
+  useEffect(() => {
+    
+    const a = () => { setActiveTab("hello") }
+
+    setTimeout(a, 5000);
+
+    return () => {
+      clearTimeout(a)
+    }
+  }, [])
+  
+
   return (
     <>
       <div className='w-full h-[100dvh] overflow-hidden bg-[#fff] relative'>
-        <div className='rounded-[50%] bg-[#9cb6dd] absolute z-[0] top-[-65%] left-[40%] blur-[120px] flex justify-start items-center' style={{ width: document.body.clientWidth + "px", height: document.body.clientWidth + "px" }}>
+        <div className='rounded-[50%] bg-[#9cb6dd] absolute z-[0] top-[-65%] left-[40%] blur-[120px] flex justify-start items-center w-full aspect-square'>
           <div className='w-[50%] h-[50%] rounded-[50%] bg-[#fff] flex items-center justify-center'>
             <div className='w-[50%] h-[50%] bg-[#d3e2f2]'></div>
           </div>
         </div>
-        <div className='rounded-[50%] bg-[#d3e2f2] absolute z-[0] top-[50%] left-[-50%] blur-[120px]' style={{ width: document.body.clientWidth + "px", height: document.body.clientWidth + "px" }}></div>
+        <div className='rounded-[50%] bg-[#d3e2f2] absolute z-[0] top-[50%] left-[-50%] blur-[120px] w-full aspect-square'></div>
 
-        <div className="w-full h-full absolute z-[9] top-0 left-0">
-          {/* header starts */}
-          <div className='w-full gap-[15px] flex justify-between py-[0] px-[20px] mt-[10px] overflow-hidden 480:flex-wrap'>
 
-            <div id="controls" className='mx-0 my-[10px] flex gap-[20px] items-center bg-[rgba(255,255,255,0.129)] p-[10px] rounded-[5px]'>
-              <div id="left">
-                <img src="./assets/file_manager/left.png" alt="" srcset="" />
+        <div className='absolute w-full h-full z-[99]'>
+          <div className='w-full h-full'>
+
+            
+
+            <div className="w-full h-[60px] flex items-center gap-[20px] px-[25px] mt-[15px]">
+              <div className='flex gap-[20px] items-center bg-[rgba(0,0,0,0.129)] p-[10px] rounded-[5px]'>
+                <img className='cursor-pointer h-[24px] opacity-[60%] hover:opacity-[100%] aspect-square' src="./assets/file_manager/left.png" alt="" />
+                <img className='cursor-pointer h-[24px] opacity-[60%] hover:opacity-[100%] aspect-square' src="./assets/file_manager/right.png" alt="" />
+                <img className='cursor-pointer h-[24px] opacity-[60%] hover:opacity-[100%] aspect-square' src="./assets/file_manager/reload.png" alt="" />
               </div>
-              <div id="right">
-                <img src="./assets/file_manager/right.png" alt="" srcset="" />
+              <div className='gap-[20px] p-[10px] flex bg-[#b3a9eb3e] items-center rounded-[5px]'>
+                <img className='cursor-pointer h-[24px] opacity-[60%] hover:opacity-[100%] aspect-square' src="./assets/file_manager/createFile.png" alt="" />
+                <img className='cursor-pointer h-[24px] opacity-[60%] hover:opacity-[100%] aspect-square' src="./assets/file_manager/createFolder.png" alt="" />
+                <img className='cursor-pointer h-[24px] opacity-[60%] hover:opacity-[100%] aspect-square' src="./assets/file_manager/rename.png" alt="" />
+                <img className='cursor-pointer h-[24px] opacity-[60%] hover:opacity-[100%] aspect-square' src="./assets/file_manager/delete.png" alt="" />
               </div>
-              <div id="reload">
-                <img src="./assets/file_manager/reload.png" alt="" srcset="" />
+              <div className='w-[calc(100%-694px)] h-[44px] rounded-[5px] bg-[rgba(0,0,0,0.126)] p-10px'>
+                <div className='w-full h-full flex items-center gap-[10px] p-[10px] px-[20px] font-[400] text-[14px] text-[rgba(0,0,0,0.64)]'>
+                  <span className='hover:text-[rgba(0,0,0,1)]'>Google:</span>
+                  <img className='h-[10px] aspect-square opacity-[64%]' src="./assets/file_manager/forward.png" alt="" srcset="" />
+                </div>
               </div>
-              <div id="hamburger">
-                <i className="ri-menu-4-line" style={{color: "white"}}></i>
+              <div className='h-[44px] w-[350px] border-[1px] border-solid border-[rgba(0,0,0,0.126)] bg-transparent flex justify-center items-center px-[10px]'>
+                <input type="text" className='outline-none w-full h-[24px] bg-transparent rounded-[5px] placeholder:text-[rgba(0,0,0,0.519)] text-[rgba(0,0,0,0.519)]' placeholder='Enter file name' />
               </div>
             </div>
 
-            <div id="actions" className='mx-0 my-[10px]'>
-              <div id="createFolder" className="action">
-                <img src="./assets/file_manager/folder.png" alt="" srcset="" />
-              </div>
-              <div id="createFile" className="action">
-                <img src="./assets/file_manager/file.png" alt="" srcset="" />
-              </div>
-              <div id="renameFile" className="action">
-                <img src="./assets/file_manager/rename.png" alt="" srcset="" />
-              </div>
-              <div id="select" className="action">
-                <img src="./assets/file_manager/select.png" alt="" srcset="" />
-              </div>
-              <div id="uploadFile" className="action">
-                <img src="./assets/file_manager/upload.png" alt="" srcset="" />
-              </div>
-              <div id="deleteFile" className="action">
-                <img src="./assets/file_manager/delete.png" alt="" srcset="" />
-              </div>
-            </div>
-
-            <div id="navigator" className='mx-0 my-[10px]'>
-              <div id="path" className="active">
-                <span>C:</span>
-                <img src="./assets/file_manager/forward.png" alt="" />
-                <span>Home</span>
-                <img src="./assets/file_manager/forward.png" alt="" />
-                <span>Junaid</span>
-              </div>
-              <div id="pathInput" className="">
-                <input type="text" name="" id="" placeholder="Enter directory path" />
-              </div>
-            </div>
-            <div id="searchBar" className='mx-0 my-[10px]'>
-              <input type="text" placeholder="Enter file or folder name" />
-            </div>
-          </div>
-
-          <div id="fileManager">
-
-            <div id="sidebar">
-              <div id="drives" className="sub-sidebar">
-                <ul className='list-none'>
-                  <li heading>
-                    <h3>Drives</h3>
+            <div className='w-[230px] h-[calc(100%-75px)] flex flex-col gap-[20px] p-[25px]'>
+              <div className='w-full flex flex-col gap-[10px]'>
+                <h3>Drives</h3>
+                <ul className='w-full flex flex-col gap-[10px]'>
+                  <li className={`flex items-center p-[10px] gap-[10px] rounded-[5px] cursor-pointer overflow-hidden relative`} style={{background: activeTab == "google_drive" ? "#d3e2f2" : "rgba(0,0,0,0.126" }}>
+                    <img className='h-[20px] aspect-square' src="./assets/file_manager/drive.png" alt="" srcset="" />
+                    <p className='text-[13px] leading-[16px] font-[200]'>Google drive</p>
+                    <div className='absolute top-0 left-0 w-[5px] h-full bg-[#9cb6dd]' style={{display: activeTab == "google_drive" ? "block" : "none"}}></div>
                   </li>
-                  <li clickAble root-path="A.R.T.E.X/home" className="active">
-                    <img src="./assets/file_manager/cloud.png" alt="" />
-                    <p>A.R.T.E.X</p>
+                  <li className={`flex items-center p-[10px] gap-[10px] rounded-[5px] cursor-pointer overflow-hidden relative`} style={{background: activeTab == "google_drive" ? "#d3e2f2" : "rgba(0,0,0,0.126" }}>
+                    <img className='h-[20px] aspect-square' src="./assets/file_manager/drive.png" alt="" srcset="" />
+                    <p className='text-[13px] leading-[16px] font-[200]'>Google drive</p>
+                    <div className='absolute top-0 left-0 w-[5px] h-full bg-[#9cb6dd]' style={{display: activeTab == "google_drive" ? "block" : "none"}}></div>
                   </li>
-                  <li clickable root-path="Google drive/home">
-                    <img src="./assets/file_manager/drive.png" alt="" srcset="" />
-                    <p>Google</p>
+                  <li className={`flex items-center p-[10px] gap-[10px] rounded-[5px] cursor-pointer overflow-hidden relative`} style={{background: activeTab == "google_drive" ? "#d3e2f2" : "rgba(0,0,0,0.126" }}>
+                    <img className='h-[20px] aspect-square' src="./assets/file_manager/drive.png" alt="" srcset="" />
+                    <p className='text-[13px] leading-[16px] font-[200]'>Google drive</p>
+                    <div className='absolute top-0 left-0 w-[5px] h-full bg-[#9cb6dd]' style={{display: activeTab == "google_drive" ? "block" : "none"}}></div>
                   </li>
                 </ul>
               </div>
-
-              <div id="draganddrop" className="sub-sidebar">
-                <ul className='list-none'>
-                  <li Draganddrop>
-                    <img src="./assets/file_manager/uploadfile.png" alt="" />
-                    <p>drop your file here</p>
-
-                    <label for="uploadfile">Select</label>
-                    <input type="file" name="" id="uploadfile" />
-                  </li>
-                </ul>
+              <div className='w-full aspect-square border-dotted border-[2px] border-[#rgba(0,0,0,0.526)] rounded-[5px] px-[10px] flex flex-col justify-evenly'>
+                <div className='w-full flex justify-center items-center'>
+                  <img className='w-[50px] aspect-square' src="./assets/file_manager/uploadfile.png" alt="" />
+                </div>
+                <div className='w-full text-center'>
+                  <p>Drop your files here.</p>
+                </div>
+                <div className='w-full'>
+                  <div className='w-full py-[7px] text-center bg-[#9cb6dd]'><p>Select files</p></div>
+                </div>
               </div>
-
-              <div id="banner" className="sub-sidebar">
-                <ul className="banner">
-                  <img src="./assets/file_manager/bannerposter.png" alt="" />
-                  <span>
-                    <h3>Sync your files</h3>
-                    <p>Lorem ipsum dolor sit amet.</p>
-                  </span>
-                </ul>
-              </div>
-
-              <i id="close-sidebar" className="ri-close-line"></i>
-
+              <div></div>
             </div>
 
-            <div id="system">
-              <ul id="file-list">
-                <li data-type="file" data-path="google/home">
-                  <input type="checkbox" name="select-file" />
-                  <span className="file-name">
-                    <img src="./assets/file_manager/system-file.png" alt="" srcset="" />
-                    <p>file.txt</p>
-                  </span>
-                  <div className="fileaction">
-                    <img title="download" src="./assets/file_manager/download.png" alt="" srcset=""
-                      id="download-btn" />
-                    <img title="rename" src="./assets/file_manager/rename.png" alt="" srcset=""
-                      id="rename-btn" />
-                    <img title="delete" src="./assets/file_manager/delete.png" alt="" srcset=""
-                      id="delete-btn" />
-                  </div>
-                </li>
-                <li data-type="folder" data-path="google/home">
-                  <input type="checkbox" name="select-file" />
-                  <span className="folder-name">
-                    <img src="./assets/file_manager/system-folder.png" alt="" srcset="" />
-                    <p>Dream</p>
-                  </span>
-                  <div></div>
-                  <div className="fileaction">
-                    <img title="rename" src="./assets/file_manager/rename.png" alt="" srcset=""
-                      id="rename-btn" />
-                    <img title="delete" src="./assets/file_manager/delete.png" alt="" srcset=""
-                      id="delete-btn" />
-                  </div>
-                </li>
-                <li data-type="file" data-path="google/home">
-                  <input type="checkbox" name="select-file" />
-                  <span className="file-name">
-                    <img src="./assets/file_manager/system-file.png" alt="" srcset="" />
-                    <p>hola.txt</p>
-                  </span>
-                  <div className="fileaction">
-                    <img title="download" src="./assets/file_manager/download.png" alt="" srcset=""
-                      id="download-btn" />
-                    <img title="rename" src="./assets/file_manager/rename.png" alt="" srcset=""
-                      id="rename-btn" />
-                    <img title="delete" src="./assets/file_manager/delete.png" alt="" srcset=""
-                      id="delete-btn" />
-                  </div>
-                </li>
-                <li data-type="folder" data-path="google/home">
-                  <input type="checkbox" name="select-file" />
-                  <span className="folder-name">
-                    <img src="./assets/file_manager/system-folder.png" alt="" srcset="" />
-                    <p>Mines</p>
-                  </span>
-                  <div></div>
-                  <div className="fileaction">
-                    <img src="./assets/file_manager/rename.png" alt="" srcset="" id="rename-btn" />
-                    <img title="delete" src="./assets/file_manager/delete.png" alt="" srcset=""
-                      id="delete-btn" />
-                  </div>
-                </li>
-                <li data-type="file" data-path="google/home">
-                  <input type="checkbox" name="select-file" />
-                  <span className="file-name">
-                    <img src="./assets/file_manager/system-file.png" alt="" srcset="" />
-                    <p>passwords.txt</p>
-                  </span>
-                  <div className="fileaction">
-                    <img title="download" src="./assets/file_manager/download.png" alt="" srcset=""
-                      id="download-btn" />
-                    <img title="rename" src="./assets/file_manager/rename.png" alt="" srcset=""
-                      id="rename-btn" />
-                    <img title="delete" src="./assets/file_manager/delete.png" alt="" srcset=""
-                      id="delete-btn" />
-                  </div>
-                </li>
-                <li data-type="folder" data-path="google/home">
-                  <input type="checkbox" name="select-file" />
-                  <span className="folder-name">
-                    <img src="./assets/file_manager/system-folder.png" alt="" srcset="" />
-                    <p>Frnds</p>
-                  </span>
-                  <div></div>
-                  <div className="fileaction">
-                    <img src="./assets/file_manager/rename.png" alt="" srcset="" id="rename-btn" />
-                    <img title="delete" src="./assets/file_manager/delete.png" alt="" srcset=""
-                      id="delete-btn" />
-                  </div>
-                </li>
-              </ul>
-            </div>
+            {/* file manager ends here */}
 
           </div>
         </div>

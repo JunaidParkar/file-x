@@ -9,7 +9,8 @@ module.exports = {
         extend: {
             backgroundImage: {
                 "login-gradient-1": "linear-gradient(to right, #4568dc, #b06ab3)",
-                // "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+                "banner-gradient": "linear-gradient(340deg, #2e4057 0%, #b3a9eb53 74%)"
+                    // "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
             },
             boxShadow: {
                 "panda-face": "0 10px 15px rgba(0, 0, 0, 0.15)",
@@ -24,7 +25,27 @@ module.exports = {
                 "panda-foot": "40px 40px 39px 40px/26px 26px 63px 63px"
             },
             screens: {
-                "480": { "max": "480px" }
+                "480": { "max": "480px" },
+                "768": { "max": "768px" },
+                "650": { "max": "650px" },
+                "380": { "min": "380px" },
+            },
+            animation: {
+                "fileAction": "scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both"
+            },
+            keyframes: {
+                "scale-up-center": {
+                    "0%": {
+                        "scale": 0,
+                        "opacity": 0,
+                        "transform": "translateY(200)"
+                    },
+                    "100%": {
+                        "scale": 1,
+                        "opacity": 1,
+                        "transform": "translateY(0)"
+                    }
+                }
             }
         },
     },
