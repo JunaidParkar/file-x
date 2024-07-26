@@ -3,18 +3,16 @@ import React, { useEffect, useState } from "react";
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState("google_drive");
+  const [path, setPath] = useState("Google drive:/hello/init/artex/A.R.T.E.X/System/Database/local/Roaming/db.db")
 
   useEffect(() => {
-    const a = () => {
-      setActiveTab("hello");
-    };
+    if (path) {
+      path.split("/")[0] == "Google drive:" ? setActiveTab("google_drive") : ""
+    }
 
-    setTimeout(a, 5000);
+    return () => { }
+  }, [path])
 
-    return () => {
-      clearTimeout(a);
-    };
-  }, []);
 
   return (
     <>
@@ -69,13 +67,21 @@ const Home = () => {
                 />
               </div>
               <div className="w-[calc(100%-694px)] h-[44px] rounded-[5px] bg-[rgba(0,0,0,0.126)] p-10px">
-                <div className="w-full h-full flex items-center gap-[10px] p-[10px] px-[20px] font-[400] text-[14px] text-[rgba(0,0,0,0.64)]">
-                  <span className="hover:text-[rgba(0,0,0,1)]">Google:</span>
-                  <img
-                    className="h-[10px] aspect-square opacity-[64%]"
-                    src="./assets/file_manager/forward.png"
-                    alt=""
-                  />
+                <div className="w-full h-full p-[10px] px-[20px] text-[rgba(0,0,0,0.64)]">
+                  <div className="w-full h-full flex items-center gap-[10px] overflow-hidden overflow-x-auto">
+                    {
+                      path.split("/").map((pt, index) => (
+                        <React.Fragment key={index}>
+                          <span className="hover:text-[rgba(0,0,0,1)] hover:px-[10px] rounded-lg hover:bg-[#b3a9eb53] text-nowrap font-[400] text-[14px] ">{pt}</span>
+                          {index < path.split("/").length - 1 ? <img
+                            className="h-[10px] aspect-square opacity-[64%]"
+                            src="./assets/file_manager/forward.png"
+                            alt=""
+                          /> : ""}
+                        </React.Fragment>
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
               <div className="h-[44px] w-[350px] border-[1px] border-solid border-[rgba(0,0,0,0.126)] bg-transparent flex justify-center items-center px-[10px]">
@@ -94,79 +100,23 @@ const Home = () => {
               <div className="w-[230px] h-full flex flex-col gap-[20px] p-[25px]">
                 <div className="w-full flex flex-col gap-[10px]">
                   <h3>Drives</h3>
-                  <ul className="w-full flex flex-col gap-[10px]">
+                  <ul className="w-full flex flex-col gap-[10px] max-h-[500px] overflow-scroll">
                     <li
-                      className={`flex items-center p-[10px] gap-[10px] rounded-[5px] cursor-pointer overflow-hidden relative`}
+                      className={`flex min-h-[36px] items-center p-[10px] gap-[10px] rounded-[5px] cursor-pointer overflow-hidden relative`}
                       style={{
-                        background:
-                          activeTab == "google_drive"
-                            ? "#d3e2f2"
-                            : "rgba(0,0,0,0.126",
+                        background: activeTab === "google_drive" ? "#d3e2f2" : "rgba(0,0,0,0.126)",
                       }}
                     >
                       <img
                         className="h-[20px] aspect-square"
                         src="./assets/file_manager/drive.png"
-                        alt=""
+                        alt="Google Drive"
                       />
-                      <p className="text-[13px] leading-[16px] font-[200]">
-                        Google drive
-                      </p>
+                      <p className="text-[13px] leading-[16px] font-[200]">Google drive</p>
                       <div
                         className="absolute top-0 left-0 w-[5px] h-full bg-[#9cb6dd]"
                         style={{
-                          display:
-                            activeTab == "google_drive" ? "block" : "none",
-                        }}
-                      ></div>
-                    </li>
-                    <li
-                      className={`flex items-center p-[10px] gap-[10px] rounded-[5px] cursor-pointer overflow-hidden relative`}
-                      style={{
-                        background:
-                          activeTab == "google_drive"
-                            ? "#d3e2f2"
-                            : "rgba(0,0,0,0.126",
-                      }}
-                    >
-                      <img
-                        className="h-[20px] aspect-square"
-                        src="./assets/file_manager/drive.png"
-                        alt=""
-                      />
-                      <p className="text-[13px] leading-[16px] font-[200]">
-                        Google drive
-                      </p>
-                      <div
-                        className="absolute top-0 left-0 w-[5px] h-full bg-[#9cb6dd]"
-                        style={{
-                          display:
-                            activeTab == "google_drive" ? "block" : "none",
-                        }}
-                      ></div>
-                    </li>
-                    <li
-                      className={`flex items-center p-[10px] gap-[10px] rounded-[5px] cursor-pointer overflow-hidden relative`}
-                      style={{
-                        background:
-                          activeTab == "google_drive"
-                            ? "#d3e2f2"
-                            : "rgba(0,0,0,0.126",
-                      }}
-                    >
-                      <img
-                        className="h-[20px] aspect-square"
-                        src="./assets/file_manager/drive.png"
-                        alt=""
-                      />
-                      <p className="text-[13px] leading-[16px] font-[200]">
-                        Google drive
-                      </p>
-                      <div
-                        className="absolute top-0 left-0 w-[5px] h-full bg-[#9cb6dd]"
-                        style={{
-                          display:
-                            activeTab == "google_drive" ? "block" : "none",
+                          display: activeTab === "google_drive" ? "block" : "none",
                         }}
                       ></div>
                     </li>
@@ -194,19 +144,33 @@ const Home = () => {
               {/* manager starts here */}
               <div className="w-[calc(100%-230px)] h-full p-[25px]">
                 <ul role="list" className="p-6 h-full overflow-x-hidden overflow-y-auto">
-                  <li className="flex py-4 first:pt-0 last:pb-0 last:border-0 border-b-[1px] border-solid border-[rgb(29,23,15,0.126)]">
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src="./assets/send.png"
-                      alt=""
-                    />
-                    <div className="ml-3 overflow-hidden">
-                      <p className="text-sm font-medium text-slate-900">name</p>
-                      <p className="text-sm text-slate-500 truncate">email</p>
-                    </div>
+                  <li className="flex py-4 first:pt-0 last:pb-0 last:border-0 border-b-[1px] border-solid border-[rgb(29,23,15,0.126)] items-center w-full last:h-[calc(44px+1rem)] first:h-[calc(44px+1rem)] h-[calc(44px+2rem)] hover:bg-[#b3a9eb53] hover:px-[20px] rounded-[5px]">
+                    <p className="text-3xl">...</p>
                   </li>
-                  <li class="flex py-4 first:pt-0 last:pb-0 last:border-0 border-b-[1px] border-solid border-[rgb(29,23,15,0.126)] items-center">
-                    <input type="checkbox" name="" id="" className="appearance-auto checked:bg-[#9cb6dd] indeterminate:bg-[#9cb6dd] scale-[1.3]" />
+                  <li className="flex py-4 first:pt-0 last:pb-0 last:border-0 border-b-[1px] border-solid border-[rgb(29,23,15,0.126)] items-center w-full last:h-[calc(44px+1rem)] first:h-[calc(44px+1rem)] h-[calc(44px+2rem)]">
+                    <div className="w-[30px] h-full flex items-center">
+                      <img src="/assets/file_manager/folder.png" className="w-full aspect-square" alt="" />
+                    </div>
+                    <div className="w-[calc(100%-162px)] px-[20px] h-full flex justify-center items-center text-xl tracking-normal">
+                      <p className="whitespace-nowrap text-ellipsis overflow-hidden">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur adipisci cupiditate accusantium soluta eveniet! Blanditiis dignissimos deleniti nam praesentium, placeat, porro est doloribus adipisci voluptas numquam fugiat error, dolorem in.</p>
+                    </div>
+                    <div className="gap-[20px] w-[132px] h-full p-[10px] flex bg-[#b3a9eb3e] items-center rounded-[5px]">
+                      <img
+                        className="cursor-pointer h-[24px] opacity-[60%] hover:opacity-[100%] aspect-square"
+                        src="./assets/file_manager/download.png"
+                        alt=""
+                      />
+                      <img
+                        className="cursor-pointer h-[24px] opacity-[60%] hover:opacity-[100%] aspect-square"
+                        src="./assets/file_manager/rename.png"
+                        alt=""
+                      />
+                      <img
+                        className="cursor-pointer h-[24px] opacity-[60%] hover:opacity-[100%] aspect-square"
+                        src="./assets/file_manager/delete.png"
+                        alt=""
+                      />
+                    </div>
                   </li>
                 </ul>
               </div>
